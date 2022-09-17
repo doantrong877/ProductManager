@@ -14,12 +14,17 @@ const Main = (props) => {
         })
         .catch(err => console.error(err));
     },[]);
-
+    const removeFromDom = productId => {
+        setProduct(product.filter(product=> product._id !== productId));
+    }
+    const refreshPage = () => {
+        window.location.reload();
+    }
     return (
         <div>
-            <ProductForm/>
+            <ProductForm refreshPage={refreshPage}/>
             <hr/>
-            {loaded && <ProductList products={product}/>}
+            {loaded && <ProductList products={product} removeFromDom={removeFromDom}/>}
         </div>
     )
 }

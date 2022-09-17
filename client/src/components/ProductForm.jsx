@@ -1,12 +1,11 @@
 import React, {useState} from "react";
 import axios from 'axios';
-
+import {useNavigate } from "react-router-dom";
 
  const ProductForm = (props) => {
     const [title, setTitle] = useState();
     const [price, setPrice] = useState();
     const [description, setDescription] = useState();
-
     const handleSubmit = e => {
         e.preventDefault();
         axios.post('http://localhost:8000/api/products/new', {
@@ -14,8 +13,9 @@ import axios from 'axios';
             price,
             description
         })
-        .then(res=>console.log(res))
+        .then(res=>{console.log(res); props.refreshPage()})
         .catch(err=>console.log(err))
+        
     }
 
     return (
