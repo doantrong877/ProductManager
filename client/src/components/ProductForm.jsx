@@ -3,18 +3,13 @@ import axios from 'axios';
 import {useNavigate } from "react-router-dom";
 
  const ProductForm = (props) => {
-    const [title, setTitle] = useState();
-    const [price, setPrice] = useState();
-    const [description, setDescription] = useState();
+    const {initialTitle, initialPrice, initialDescription, onSubmitProp} = props;
+    const [title, setTitle] = useState(initialTitle);
+    const [price, setPrice] = useState(initialPrice);
+    const [description, setDescription] = useState(initialDescription);
     const handleSubmit = e => {
         e.preventDefault();
-        axios.post('http://localhost:8000/api/products/new', {
-            title,
-            price,
-            description
-        })
-        .then(res=>{console.log(res); props.refreshPage()})
-        .catch(err=>console.log(err))
+       onSubmitProp({title,price,description});
         
     }
 
@@ -24,17 +19,17 @@ import {useNavigate } from "react-router-dom";
           <form onSubmit={handleSubmit}>
             <div>
                 <label htmlFor="">Title</label>
-                <input onChange={e => setTitle(e.target.value)}/>
+                <input value={title} onChange={e => setTitle(e.target.value)}/>
             </div>
             <div>
                 <label htmlFor="">Price</label>
-                <input onChange={e => setPrice(e.target.value)}/>
+                <input value={price} onChange={e => setPrice(e.target.value)}/>
             </div>
             <div>
                 <label htmlFor="">Description</label>
-                <input onChange={e => setDescription(e.target.value)}/>
+                <input value={description} onChange={e => setDescription(e.target.value)}/>
             </div>
-            <button type="submit">Create</button>
+            <button type="submit">Submit</button>
         </form>  
         </div>
         

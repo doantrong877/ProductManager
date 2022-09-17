@@ -14,15 +14,22 @@ const Main = (props) => {
         })
         .catch(err => console.error(err));
     },[]);
+
+    const createProduct = productTemp => {
+        axios.post('http://localhost:8000/api/products/new', productTemp)
+        .then(res=>{setProduct([...product, res.data]);})
+        .catch(err=>console.log(err))
+    }
+
     const removeFromDom = productId => {
         setProduct(product.filter(product=> product._id !== productId));
     }
-    const refreshPage = () => {
-        window.location.reload();
-    }
+
+
+
     return (
         <div>
-            <ProductForm refreshPage={refreshPage}/>
+            <ProductForm onSubmitProp={createProduct} initialTitle="" inititalPrice="" initialDescription=""/>
             <hr/>
             {loaded && <ProductList products={product} removeFromDom={removeFromDom}/>}
         </div>
