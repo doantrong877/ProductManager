@@ -10,7 +10,7 @@ const ProductList = (props) => {
             {props.products.map((product, i) =>
                 <div>
                     <Link to={`/${product._id}`} key={i}>{product.title}</Link>
-                    <Link to={`/update/${product._id}`} key={`update${i}`}>Update</Link>
+                    <Link to={`/edit/${product._id}`} key={`update${i}`}>Update</Link>
                 </div>
 
             )}
