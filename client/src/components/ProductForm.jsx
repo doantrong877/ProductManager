@@ -3,7 +3,7 @@ import axios from 'axios';
 import {useNavigate } from "react-router-dom";
 
  const ProductForm = (props) => {
-    const {initialTitle, initialPrice, initialDescription, onSubmitProp} = props;
+    const {initialTitle, initialPrice, initialDescription, onSubmitProp, errorMessage} = props;
     const [title, setTitle] = useState(initialTitle);
     const [price, setPrice] = useState(initialPrice);
     const [description, setDescription] = useState(initialDescription);
@@ -17,6 +17,8 @@ import {useNavigate } from "react-router-dom";
         <div>
             <h1>Product Manager</h1>
           <form onSubmit={handleSubmit}>
+                {errorMessage.map((err, index) => 
+                <p key={index}>{err}</p>)}
             <div>
                 <label htmlFor="">Title</label>
                 <input value={title} onChange={e => setTitle(e.target.value)}/>
